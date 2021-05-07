@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> inputEntered = new ArrayList<>();
     private boolean clearScreen = false;
     private AlphaAnimation buttonClick = new AlphaAnimation(2F, 1F);
+    private String mathEndpoint = "http://10.0.2.2:8080/test/rest/calculate/";
 
 
     @Override
@@ -87,26 +88,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void doMath() {
         if (inputEntered.contains("+")) {
-            int addedNumber = Integer.parseInt(inputEntered.get(0)) + Integer.parseInt(tvCalculator.getText().toString());
-            tvCalculator.setText(String.valueOf(addedNumber));
+            String urlString = "add?a=x&b=y".replace("x", inputEntered.get(0)).replace("y", tvCalculator.getText().toString());
+            tvCalculator.setText(String.valueOf(MathTask.getMathCall(mathEndpoint + urlString)));
             inputEntered.clear();
         }
 
         if (inputEntered.contains("-")) {
-            int subtractedNumber = Integer.parseInt(inputEntered.get(0)) - Integer.parseInt(tvCalculator.getText().toString());
-            tvCalculator.setText(String.valueOf(subtractedNumber));
+            String urlString = "subtract?a=x&b=y".replace("x", inputEntered.get(0)).replace("y", tvCalculator.getText().toString());
+            tvCalculator.setText(String.valueOf(MathTask.getMathCall(mathEndpoint + urlString)));
             inputEntered.clear();
         }
 
         if (inputEntered.contains("x")) {
-            int multipliedNumber = Integer.parseInt(inputEntered.get(0)) * Integer.parseInt(tvCalculator.getText().toString());
-            tvCalculator.setText(String.valueOf(multipliedNumber));
+            String urlString = "multiply?" + "a=x&b=y".replace("x", inputEntered.get(0)).replace("y", tvCalculator.getText().toString());
+            tvCalculator.setText(String.valueOf(MathTask.getMathCall(mathEndpoint + urlString)));
             inputEntered.clear();
         }
 
         if (inputEntered.contains("÷")) {
-            int dividedNumber = Integer.parseInt(inputEntered.get(0)) / Integer.parseInt(tvCalculator.getText().toString());
-            tvCalculator.setText(String.valueOf(dividedNumber));
+            String urlString = "divide?a=x&b=y".replace("x", inputEntered.get(0)).replace("y", tvCalculator.getText().toString());
+            tvCalculator.setText(String.valueOf(MathTask.getMathCall(mathEndpoint + urlString)));
             inputEntered.clear();
         }
     }
